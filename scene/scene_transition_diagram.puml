@@ -40,6 +40,6 @@ Scene_Equip --> Scene_Menu :  cancel (prev)
 Scene_Status --> Scene_Menu : cancel (prev)
 
 Scene_Gameover --> Scene_Title : ok
-Scene_Battle --> SceneGameover : game party is all dead
-Scene_Map --> SceneGameover : event
+Scene_Battle --> Scene_Gameover : game party is all dead
+Scene_Map --> Scene_Gameover : event
 @enduml
