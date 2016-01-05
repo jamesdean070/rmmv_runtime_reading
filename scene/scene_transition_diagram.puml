@@ -1,0 +1,41 @@
+@startuml
+[*] --> Scene_Boot
+
+Scene_Boot --> Scene_Title : on complete resource loading
+
+Scene_Title --> Scene_Map : new game
+Scene_Title --> Scene_Load : continue
+Scene_Title --> Scene_Options : options
+
+Scene_Load --> Scene_Title : cancel (prev)
+Scene_Options --> Scene_Title : cancel (prev)
+
+Scene_Load --> Scene_Map : on load success
+
+Scene_Map --> Scene_Menu : trigger menu input
+Scene_Map --> Scene_Battle : encount
+Scene_Map --> Scene_Debug : trigger debug input
+Scene_Map --> Scene_Name : game event
+Scene_Map --> Scene_Shop : game event
+
+Scene_Name --> Scene_Map : on complete  (prev)
+Scene_Debug --> Scene_Map : cancel (prev)
+Scene_Shop --> Scene_Map : cancel (prev)
+
+Scene_Menu --> Scene_Item :  item command
+Scene_Menu --> Scene_Options :  option command
+Scene_Menu --> Scene_Save :  save command
+Scene_Menu --> Scene_GameEnd :  game end command
+Scene_Menu --> Scene_Skill :  skill command
+Scene_Menu --> Scene_Equip :  equip command
+Scene_Menu --> Scene_Status :  status command
+Scene_Menu --> Scene_Map :  cancel command (prev)
+
+Scene_Item --> Scene_Menu :  cancel (prev)
+Scene_Options --> Scene_Menu :  cancel (prev)
+Scene_Save --> Scene_Menu :  on save success |cancel (prev)
+Scene_GameEnd --> Scene_Menu :  cancel (prev)
+Scene_Skill --> Scene_Menu :  cancel (prev)
+Scene_Equip --> Scene_Menu :  cancel (prev)
+Scene_Status --> Scene_Menu : cancel (prev)
+@enduml
