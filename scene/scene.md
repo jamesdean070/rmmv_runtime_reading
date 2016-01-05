@@ -102,9 +102,9 @@ Scene_Save・Scene_Loadの親クラス。セーブ画面を表示して選択す
 #### Scene_Load
 ロード画面
 ![Scene_Load](./images/Scene_Load.png)
-#### Scene_GameEnd
+#### Scene_Gameend
 ゲーム終了画面
-![Scene_GameEnd](./images/Scene_GameEnd.png)
+![Scene_GameEnd](./images/Scene_Gameend.png)
 #### Scene_Shop
 ショップ画面
 ![Scene_Shop](./images/Scene_Shop.png)
