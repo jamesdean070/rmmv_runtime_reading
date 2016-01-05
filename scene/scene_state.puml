@@ -1,15 +1,40 @@
 @startuml
-[*] --> initialized
+[*] --> initialized :new ()
 initialized --> ready : create()
-ready --> active : start()
-state active {
-  [*] --> idle
-  idle --> busy
-  busy --> idle
-}
-active --> ready : stop()
-active --> terminated : teminate()
+ready --> start_transition : start()
+start_transition --> running: update()
+running --> running : update()
+running --> stop_transition : stop()
+stop_transition --> stop_transition : update()
+stop_transition --> stopped : update()
+stopped --> terminated : terminate()
 terminated --> [*]
 
+initialized: isReady: false
+initialized: isActive: false
+initialized: isBusy: false
 
+ready: isReady: true
+ready: isActive: false
+ready: isBusy: false
+
+start_transition: isReady: true
+start_transition: isActive: true
+start_transition: isBusy: true
+
+running: isReady: true
+running: isActive: true
+running: isBusy: false
+
+stop_transition: isReady: true
+stop_transition: isActive: false
+stop_transition: isBusy: true
+
+stopped: isReady: true
+stopped: isActive: false
+stopped: isBusy: false
+
+terminated: isReady: true
+terminated: isActive: false
+terminated: isBusy: false
 @enduml

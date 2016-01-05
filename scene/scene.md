@@ -16,6 +16,7 @@ Sceneオブジェクトの責務はフレームごとの処理を実行するこ
 Sceneはゲームを場面にそって駆動し、次にどのSceneに遷移するかを管理するオブジェクト。
 
 ### ステートマシン図
+![scene_state][images/scene_state.svg]
 - initialized: 生成されたが、画像の読み込みなど開始に必要な準備が済んでいない状態
 - ready: 開始準備が整っているが、まだ開始されていない状態
 - active: 開始されて実行中. update()が呼ばれることで順次移動 busy?
@@ -132,5 +133,9 @@ Scene_Save・Scene_Loadの親クラス。セーブ画面を表示して選択す
 
 
 ## TODO:
-gotoとpopの違い
-SceneのState
+### gotoとpopの違い
+遷移先のSceneがpopで戻ってくる可能性がある場合はpush
+そうでなければgoto
+### SceneのState
+transitioning/transitionedをScene_Mangerで管理しているがSceneに移すべきでは？
+Sceneは自分が今どのライフサイクルにいるのかがわからない。
