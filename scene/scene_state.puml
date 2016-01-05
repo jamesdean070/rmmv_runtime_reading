@@ -1,0 +1,15 @@
+@startuml
+[*] --> initialized
+initialized --> ready : create()
+ready --> active : start()
+state active {
+  [*] --> idle
+  idle --> busy
+  busy --> idle
+}
+active --> ready : stop()
+active --> terminated : teminate()
+terminated --> [*]
+
+
+@enduml
