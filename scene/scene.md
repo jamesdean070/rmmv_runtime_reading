@@ -1,8 +1,8 @@
 # Sceneを理解する
 ## ３行で
-RPGメーカーで作られたゲームはSceneオブジェクトの更新を繰り返すことで進行する。
-ゲーム中にアクティブになれるSceneはただ１つだけで、SceneManagerがこれを保持している。
-Sceneオブジェクトの責務はフレームごとの処理を実行することと、次に遷移するSceneをSceneManagerに通知すること。
+- RPGメーカーで作られたゲームはSceneオブジェクトの更新を繰り返すことで進行する。
+- ゲーム中にアクティブになれるSceneはただ１つだけで、SceneManagerがこれを保持している。
+- Sceneオブジェクトの責務はフレームごとの処理を実行することと、次に遷移するSceneをSceneManagerに通知すること。
 
 ## SceneManger
 グローバルに定義されたシングルトンオブジェクト.
@@ -17,11 +17,6 @@ Sceneはゲームを場面にそって駆動し、次にどのSceneに遷移す�
 
 ### ステートマシン図
 ![scene_state][images/scene_state.svg]
-- initialized: 生成されたが、画像の読み込みなど開始に必要な準備が済んでいない状態
-- ready: 開始準備が整っているが、まだ開始されていない状態
-- active: 開始されて実行中. update()が呼ばれることで順次移動 busy?
-- stopped: 実行が終了し、terminatedに移るのを待っている状態
-- terminated: 終了された状態
 
 ### Sceneごとの遷移
 ![scene_transition_diagram](images/scene_transition_diagram.svg)
