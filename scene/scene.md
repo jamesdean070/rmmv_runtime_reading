@@ -33,8 +33,8 @@ SceneManagerの実装を読んだところ、Sceneオブジェクトのライフ
 ### Sceneごとの遷移
 ![scene_transition_diagram](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_transition_diagram.svg)  
 
-※ (return prev scene)とある遷移は「直前のSceneに戻る」という処理。
-※ game eventによる遷移はユーザーが指定したイベント処理によって発生するのでScene_MapだけでなくScene_Battleから遷移することもできそう？
+- ※ (return prev scene)とある遷移は「直前のSceneに戻る」という処理。
+- ※ game eventによる遷移はユーザーが指定したイベント処理によって発生するのでScene_MapだけでなくScene_Battleから遷移することもできそう？
 
 ### 各クラス
 Scene関連のクラスの概要とプラグインを作るときにどのクラスを拡張すればよいかの指針を紹介する。
@@ -131,7 +131,7 @@ Scene_Save・Scene_Loadの親クラス。セーブ画面を表示して選択す
 デバッグ画面
 ![Scene_Debug](./images/Scene_Debug.png)
 #### Scene_Battle
-戦闘画面。Scene_Battleはウィンドウの初期化とコールバック処理の登録の実行しかしておらず、実際の戦闘処理はBattleManagerに移譲している。
+戦闘画面。実際の戦闘処理はBattleManagerに移譲している。
 ![Scene_Battle](./images/Scene_Battle.png)
 #### Scene_Gameover
 ゲームオーバー画面
