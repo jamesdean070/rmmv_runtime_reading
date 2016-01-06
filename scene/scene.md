@@ -26,11 +26,13 @@ Sceneはゲームを場面にそって駆動し、次にどのSceneに遷移す�
 SceneManagerの実装を読んだところ、Sceneオブジェクトのライフサイクルは下図のようになっている。
 コード上に明示的に書かれているわけではないのでステート名は適当なものをつけた。  
 しかしSceneオブジェクトはready,busy,activeの３つのプロパティしかもっていないため自身がライフサイクルのうちどの状態にあるのかを知ることができない。
-プラグインを作るときには要注意。
+プラグインを作るときには要注意。  
+
 ![scene_state](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_state.svg)
 
 ### Sceneごとの遷移
-![scene_transition_diagram](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_transition_diagram.svg)
+![scene_transition_diagram](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_transition_diagram.svg)  
+
 ※ (return prev scene)とある遷移は「直前のSceneに戻る」という処理。
 ※ game eventによる遷移はユーザーが指定したイベント処理によって発生するのでScene_MapだけでなくScene_Battleから遷移することもできそう？
 
