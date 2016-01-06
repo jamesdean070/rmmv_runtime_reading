@@ -34,7 +34,7 @@ SceneManagerの実装を読んだところ、Sceneオブジェクトのライフ
 ![scene_transition_diagram](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_transition_diagram.svg)  
 
 - ※ (return prev scene)とある遷移は「直前のSceneに戻る」という処理。
-- ※ "game event"はユーザーが指定したイベント処理によって発生する遷移。Scene_MapだけでなくScene_Battleなどでもイベントが発生するので「戦闘中にショップ画面に移動する」ということも可能？
+- ※ "game event"はユーザーが指定したイベント処理によって発生する遷移。Scene_MapだけでなくScene_Battleなどでもイベントが発生しうるので「戦闘中にショップ画面に移動する」ことも可能？
 
 ### 各クラス
 Scene関連のクラスの概要とプラグインを作るときにどのクラスを拡張すればよいかの指針を紹介する。
