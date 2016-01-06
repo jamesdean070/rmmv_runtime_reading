@@ -30,7 +30,7 @@ SceneManagerの実装を読んだところ、Sceneオブジェクトのライフ
 
 ![scene_state](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_state.svg)
 
-### Sceneごとの遷移
+### Sceneどうしの遷移図
 ![scene_transition_diagram](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_transition_diagram.svg)  
 
 - ※ (return prev scene)とある遷移は「直前のSceneに戻る」という処理。
