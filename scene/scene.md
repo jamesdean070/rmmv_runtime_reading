@@ -12,11 +12,20 @@
 - 毎フレームごとにSceneを更新する
 - スクリプトがエラーを起こした時にダイアログを表示する
 
+### 主なメソッド
+#### goto
+#### push
+#### pop
+
 ## Sceneオブジェクト
 Sceneはゲームを場面にそって駆動し、次にどのSceneに遷移するかを管理するオブジェクト。
 
-### ステートマシン図
-![scene_state][images/scene_state.svg]
+### 主なメソッド
+
+### Sceneオブジェクトのライフサイクル
+Sceneオブジェクトのライフサイクルは以下のようになっている。
+しかしSceneオブジェクトはready,busy,activeの３つのプロパティしかもっていないため自身がライフサイクルのうちどの状態にあるのかを知ることができない。
+![scene_state](images/scene_state.svg)
 
 ### Sceneごとの遷移
 ![scene_transition_diagram](images/scene_transition_diagram.svg)
@@ -132,5 +141,3 @@ Scene_Save・Scene_Loadの親クラス。セーブ画面を表示して選択す
 遷移先のSceneがpopで戻ってくる可能性がある場合はpush
 そうでなければgoto
 ### SceneのState
-transitioning/transitionedをScene_Mangerで管理しているがSceneに移すべきでは？
-Sceneは自分が今どのライフサイクルにいるのかがわからない。
