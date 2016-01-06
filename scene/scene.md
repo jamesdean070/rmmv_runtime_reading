@@ -15,7 +15,7 @@
 ### 主なメソッド
 - ```goto(Scene): void``` Sceneを切り替える。
 - ```push(Scene): void``` Sceneを切り替える。gotoと異なり新しいSceneをスタックの上に積むので遷移先のSceneがpopメソッドで直前のSceneに戻ることができる.
-- ```pop(Scene): void``` 直前のSceneに遷移する。スタックが空の場合はゲームを終了する。
+- ```pop(Scene): void``` 直前のSceneに遷移する。
 
 ## Sceneオブジェクト
 Sceneはゲームを場面にそって駆動し、次にどのSceneに遷移するかを管理するオブジェクト。
