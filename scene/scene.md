@@ -5,7 +5,7 @@
 - Sceneオブジェクトの責務はフレームごとの処理を実行することと、次に遷移するSceneをSceneManagerに通知すること。
 
 ## SceneManger
-グローバルに定義されたシングルトンオブジェクト.
+グローバルに定義されたシングルトンオブジェクト. 
 ### 責務
 - 現在有効なSceneの保持
 - Sceneの切り替え
@@ -13,9 +13,9 @@
 - スクリプトがエラーを起こした時にダイアログを表示する
 
 ### 主なメソッド
-#### goto
-#### push
-#### pop
+- ```goto(Scene): void``` Sceneを切り替える。
+- ```push(Scene): void``` Sceneを切り替える。gotoと異なり新しいSceneをスタックの上に積むので遷移先のSceneがpopメソッドで直前のSceneに戻ることができる.
+- ```pop(Scene): void``` 直前のSceneに遷移する。スタックが空の場合はゲームを終了する。
 
 ## Sceneオブジェクト
 Sceneはゲームを場面にそって駆動し、次にどのSceneに遷移するかを管理するオブジェクト。
@@ -23,12 +23,14 @@ Sceneはゲームを場面にそって駆動し、次にどのSceneに遷移す�
 ### 主なメソッド
 
 ### Sceneオブジェクトのライフサイクル
-Sceneオブジェクトのライフサイクルは以下のようになっている。
+SceneManagerの実装を読んだところ、Sceneオブジェクトのライフサイクルは下図のようになっている。
+コード上に明示的に書かれているわけではないのでステート名は適当なものをつけた。  
 しかしSceneオブジェクトはready,busy,activeの３つのプロパティしかもっていないため自身がライフサイクルのうちどの状態にあるのかを知ることができない。
+プラグインを作るときには要注意。
 ![scene_state](images/scene_state.svg)
 
 ### Sceneごとの遷移
-![scene_transition_diagram](images/scene_transition_diagram.svg)
+![scene_transition_diagram](https://raw.githubusercontent.com/ryiwamoto/rmmv_runtime_reading/master/scene/images/scene_transition_diagram.svg)
 ※ (return prev scene)とある遷移は「直前のSceneに戻る」という処理。
 ※ game eventによる遷移はユーザーが指定したイベント処理によって発生するのでScene_MapだけでなくScene_Battleから遷移することもできそう？
 
@@ -134,10 +136,3 @@ Scene_Save・Scene_Loadの親クラス。セーブ画面を表示して選択す
 ![Scene_Gameover](./images/Scene_Gameover.png)
 ##### いつ拡張する？
 - ゲームオーバー時に表示する情報を変更したい（死因の表示など）
-
-
-## TODO:
-### gotoとpopの違い
-遷移先のSceneがpopで戻ってくる可能性がある場合はpush
-そうでなければgoto
-### SceneのState
