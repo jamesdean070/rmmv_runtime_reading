@@ -1,15 +1,15 @@
 # Sceneクラスを理解する
 ## ３行で
-- RPGメーカーで作られたゲームはSceneオブジェクトの更新を繰り返すことで進行する。
-- ゲーム中にアクティブになれるSceneはただ１つだけで、SceneManagerがこれを保持している。
-- Sceneオブジェクトの責務はフレームごとの処理を実行することと次に遷移するSceneを決定すること。
+- ツクールで作られたゲームは、Sceneオブジェクトがゲームの状態を毎フレームごとに更新することで進行する。
+- Sceneオブジェクトは現在の場面に沿った処理を行い、次にどのSceneに遷移するかを知っている。
+- ゲーム中にアクティブになれるSceneは同時にただ１つだけで、SceneManagerが切り替え処理などを管理する。
 
 ## SceneManger
 グローバル名前空間に定義されたシングルトンオブジェクト.
 ### 責務
 - 現在有効なSceneの保持
 - Sceneの切り替え
-- 毎フレームごとにSceneを更新する
+- 毎フレームごとにSceneに対して更新メッセージを送る
 - スクリプトがエラーを起こした時にダイアログを表示する
 
 ### 主なメソッド
@@ -29,6 +29,7 @@ SceneManagerの実装を読んだところ、Sceneオブジェクトのライフ
 プラグインを作るときには要注意。
 
 ![scene_state](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_state.svg)
+
 - ```initialized``` 初期化直後の状態。
 - ```ready``` 開始に必要なリソースの読み込みなどが完了した状態。
 - ```start_transition``` Sceneを切り替えるアニメーションを行っている状態
@@ -40,6 +41,7 @@ SceneManagerの実装を読んだところ、Sceneオブジェクトのライフ
 ### Sceneどうしの遷移図
 Scene同士のつながりをイメージしやすくするため、ざっくりとした遷移図を作った。ユーザー定義イベントで任意のSceneに遷移することができるため、全ての遷移を書ききれているわけではない。
 ![scene_transition_diagram](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_transition_diagram.svg)
+
 - ※ (prev)とある遷移は「直前のSceneに戻る」という処理。
 - ※ "game event"はユーザーが定義したイベントによって発生する遷移。
 
@@ -94,7 +96,7 @@ htmlのエントリポイントから呼び出されるScene。
 
 #### Scene_ItemBase
 Scene_ItemとScene_Skillの親クラス。選択された「アクター」にGame_Itemを適用する実装がある。
-読んでいる時にちょっと混乱したのだが、ツクールでは「道具（アイテム）」「スキル」「武器」「防具」をまとめてGame_Itemクラスで表現している。
+読んでいる時にちょっと混乱したのだが、ツクールでは「道具（アイテム）」「スキル」「武器」「防具」をまとめてGame_Itemクラス１つで表現している。
 
 ---
 ここから下で紹介するクラスは機能が薄くプラグインを作る上で見どころがないので簡単に紹介する。
