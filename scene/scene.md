@@ -14,7 +14,7 @@
 
 ### 主なメソッド
 - ```goto(Scene): void``` Sceneを切り替える。
-- ```push(Scene): void``` Sceneを切り替える。gotoと異なり新しいSceneをスタックの上に積むので遷移先のSceneがpopメソッドで直前のSceneに戻ることができる.
+- ```push(Scene): void``` Sceneを切り替える。gotoと異なり新しいSceneをスタックに積むので遷移先のSceneがpopメソッドで直前のSceneに戻ることができる.
 - ```pop(Scene): void``` 直前のSceneに遷移する。
 - ```snap(): Bitmap``` 現在のSceneのスクリーンショットを返す
 - ```snapForBackground(): Bitmap``` snap()で取得したスクリーンショットにブラーエフェクトをかけたものを返す
@@ -31,21 +31,21 @@ SceneManagerの実装を読んだところ、Sceneオブジェクトのライフ
 ![scene_state](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_state.svg)
 - ```initialized``` 初期化直後の状態。
 - ```ready``` 開始に必要なリソースの読み込みなどが完了した状態。
-- ```start_transition``` Sceneを切り替えるフェードイン処理を行っている状態
+- ```start_transition``` Sceneを切り替えるアニメーションを行っている状態
 - ```running``` Sceneを実行している状態
-- ```stop_transition``` Sceneを切り替えるフェードアウト処理を行っている状態
+- ```stop_transition``` Sceneを切り替えるアニメーションを行っている状態
 - ```stopped``` 新しいSceneに画面が置き換わり破棄される準備が整った状態
-- ```terminated``` Sceneの破棄に必要な処理（ゲームウィンドウオブジェクトの破棄など）が終わりGCによって回収されるのを待っている状態
+- ```terminated``` Sceneの破棄に必要な処理（ゲームウィンドウオブジェクトの破棄など）が終わった状態。
 
 ### Sceneどうしの遷移図
+Scene同士のつながりをイメージしやすくするため、ざっくりとした遷移図を作った。ユーザー定義イベントで任意のSceneに遷移することができるため、全ての遷移を書ききれているわけではない。
 ![scene_transition_diagram](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/scene_transition_diagram.svg)
-
 - ※ (prev)とある遷移は「直前のSceneに戻る」という処理。
-- ※ "game event"はユーザーが定義したイベントによって発生する遷移。Scene_MapだけでなくScene_Battleでもイベントが発生しうるので「戦闘中にショップ画面に移動する」ことも可能？
+- ※ "game event"はユーザーが定義したイベントによって発生する遷移。
 
 ### Sceneの各クラスと拡張指針
 Scene関連のクラスの概要とプラグインを作るときにどのクラスを拡張すればよいかの指針を紹介する。
-#### Scene_base
+#### Scene_Base
 Sceneの抽象クラス。全Sceneで共通の処理がまとめてある。
 #### 拡張できる機能
 - 全てのSceneで毎フレームごとの処理
@@ -60,7 +60,7 @@ htmlのエントリポイントから呼び出されるScene。
 #### 拡張できる機能
 - ゲーム初期化時の追加処理
 - 画像・データベース・フォント・音声データ以外のデータを先読みさせる機能
-- デバッグオプションから飛ぶことができるSceneを増やす
+- デバッグオプションから遷移することができるSceneを増やす
 
 #### Scene_Title
 タイトル画面。
@@ -75,11 +75,11 @@ htmlのエントリポイントから呼び出されるScene。
 マップ上の具体的な処理（マップ描画・イベント発生判定処理・乗り物処理など）はGame_Mapに移譲している。
 ![Scene_Map](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/Scene_Map.png)
 #### 拡張できる機能
-- 戦闘画面に遷移するときの処理（画面点滅エフェクト・BGMを停止する処理）
+- 戦闘画面に遷移するときのエフェクト（画面点滅・BGMを停止する）
 - メニュー画面に遷移するときのエフェクト
 
 #### Scene_MenuBase
-メニュー画面の抽象クラス。背景設定処理とアイテム画面などでつかう「ゲームパーティーからコマンド対象を選ぶ機能」の実装をもつ。
+メニュー画面の抽象クラス。背景設定と「パーティーからアクターを選ぶ機能」の実装をもつ。
 ##### 拡張できる機能
 - メニュー画面の背景
 
@@ -97,7 +97,7 @@ Scene_ItemとScene_Skillの親クラス。選択された「アクター」にGa
 読んでいる時にちょっと混乱したのだが、ツクールでは「道具（アイテム）」「スキル」「武器」「防具」をまとめてGame_Itemクラスで表現している。
 
 ---
-ここから下はほとんどWindowを起動しているだけでプラグインを作る上で見どころがないので省略。
+ここから下で紹介するクラスは機能が薄くプラグインを作る上で見どころがないので簡単に紹介する。
 #### Scene_Item
 アイテム画面
 ![Scene_Item](http://ryiwamoto.github.io/rmmv_runtime_reading/scene/images/Scene_Item.png)
